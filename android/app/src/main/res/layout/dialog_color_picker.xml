@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/dialog_color_picker.xml -->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="#1E1E1E">
+
+    <!-- Large Color Preview -->
+    <View
+        android:id="@+id/color_preview_large"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="#1E1E1E">
+
+
+        <!-- Hex Value Display -->
+        <TextView
+            android:id="@+id/hex_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:text="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace" />
+
+        <!-- Red Slider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="R"
+                android:textColor="#FF5555"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/slider_red"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="255"
+                android:progress="255"
+                android:progressTint="#FF5555"
+                android:thumbTint="#FF5555" />
+
+            <TextView
+                android:id="@+id/value_red"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="255"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <!-- Green Slider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="G"
+                android:textColor="#55FF55"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/slider_green"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="255"
+                android:progress="255"
+                android:progressTint="#55FF55"
+                android:thumbTint="#55FF55" />
+
+            <TextView
+                android:id="@+id/value_green"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="255"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <!-- Blue Slider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="B"
+                android:textColor="#5555FF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/slider_blue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="255"
+                android:progress="255"
+                android:progressTint="#5555FF"
+                android:thumbTint="#5555FF" />
+
+            <TextView
+                android:id="@+id/value_blue"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="255"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <!-- Quick Presets -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick Colors:"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/quick_red"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#FF0000"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_green"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#00FF00"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_blue"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#0000FF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_yellow"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#FFFF00"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_cyan"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#00FFFF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_magenta"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#FF00FF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/quick_white"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="4dp"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

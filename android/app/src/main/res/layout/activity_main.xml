@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="12dp"
+    tools:context=".MainActivity">
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- TOP ROW: Connection & Settings -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+
+    <LinearLayout
+        android:id="@+id/layout_connection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout_lights"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25">
+
+        <TextView
+            android:id="@+id/textview_connection_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/status_disconnected_dot"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textview_battery_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="@string/battery_na"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_connect"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="@string/connect"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <!-- Lights & RGB Controls -->
+    <LinearLayout
+        android:id="@+id/layout_lights"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4">
+
+        <!-- Headlights -->
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_headlights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/headlights"
+            android:textColor="#CCCCCC"
+            android:textSize="10sp" />
+
+        <!-- RGB Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/led_effects"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <!-- RGB Animation Selector -->
+        <Spinner
+            android:id="@+id/spinner_rgb_mode"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="2dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:popupBackground="#2E2E2E" />
+
+        <!-- Color Picker Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/color_label"
+                android:textColor="#AAAAAA"
+                android:textSize="9sp" />
+
+            <!-- Color Preview Box -->
+            <View
+                android:id="@+id/color_preview"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="6dp"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Quick Color Presets -->
+            <View
+                android:id="@+id/color_preset1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="3dp"
+                android:background="#FF0000"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/color_preset2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="3dp"
+                android:background="#00FF00"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/color_preset3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="3dp"
+                android:background="#0000FF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/color_preset4"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="3dp"
+                android:background="#FFFF00"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <View
+                android:id="@+id/color_preset5"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <ImageView
+                android:id="@+id/settingsButton"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:src="@android:drawable/ic_menu_manage"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/settings_description"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Indicators & Horn -->
+    <LinearLayout
+        android:id="@+id/layout_indicators"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/layout_lights"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/indicators"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_ind_left"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:text="@string/ind_left"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_ind_off"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="1"
+                android:text="@string/ind_off"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_ind_right"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:text="@string/ind_right"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_beep"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/horn"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════ -->
+    <!-- BOTTOM: Pedals & Steering -->
+    <!-- ════════════════════════════════════════════════════════════════ -->
+
+    <!-- Brake Pedal -->
+    <Button
+        android:id="@+id/button_brake"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#D32F2F"
+        android:text="@string/brake"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintStart_toStartOf="@+id/layout_indicators"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout"
+        app:layout_constraintWidth_percent="0.14" />
+
+    <!-- Steering Display -->
+    <LinearLayout
+        android:id="@+id/layout_steering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+        app:layout_constraintStart_toEndOf="@+id/button_brake"
+        app:layout_constraintTop_toBottomOf="@+id/layout_lights">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:importantForAccessibility="no"
+            android:src="@android:drawable/ic_menu_compass"
+            app:tint="#BB86FC" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/steering"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/label_steering_angle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="0°"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/tilt_to_steer"
+            android:textColor="#666666"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <!-- Gas Pedal -->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/layout_connection"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintTop_toBottomOf="@+id/layout_indicators"
+        app:layout_constraintWidth_percent="0.14">
+
+        <ProgressBar
+            android:id="@+id/gas_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#20FFFFFF"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progressTint="#388E3C"
+            android:rotation="-90"
+            android:scaleX="2" />
+
+        <TextView
+            android:id="@+id/label_gas_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="10dp"
+            android:text="@string/_0"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_gas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="@string/gas"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

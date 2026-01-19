@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.BMini4" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Fullscreen is handled in MainActivity using WindowCompat -->
+    </style>
+</resources>
