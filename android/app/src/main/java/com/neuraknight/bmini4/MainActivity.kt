@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         private const val SERVO_CENTER = (SERVO_MIN + SERVO_MAX) / 2
         private const val STEERING_THRESHOLD = 6
         private const val AUTO_IND_THRESHOLD = 15
+        private const val THROTTLE_LEVELS = 3
         
         private const val SERVER_IP = "192.168.4.1"
         private const val SERVER_PORT = 80
@@ -265,12 +266,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     vibrate(VIBRATE_SHORT)
                     send("brake on")
                     binding.buttonGas.isEnabled = false
+                    binding.buttonGas.isEnabled = true
                     currentGas = 0
                     updateGasVisual(0)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     send("brake off")
-                    binding.buttonGas.isEnabled = true
                 }
             }
             true
@@ -279,7 +280,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         binding.buttonGas.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                    val level = ((5 * (v.height - event.y)) / v.height).toInt().coerceIn(0, 5)
+                    val level = ((THROTTLE_LEVELS * (v.height - event.y)) / v.height).toInt().coerceIn(0, THROTTLE_LEVELS)
                     if (level != currentGas) {
                         currentGas = level
                         updateGasVisual(level)

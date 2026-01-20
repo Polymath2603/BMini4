@@ -49,7 +49,7 @@ const int PIN_RGB_RED = TX, PIN_RGB_GREEN = RX, PIN_RGB_BLUE = D8;
 // ═════════════════════════════════════════════════════════════════════════
 const char* SSID = "BMini4", *PSK = "26032009";
 const int SERVO_MIN = 45, SERVO_MAX = 135, SERVO_CENTER = 90, STEERING_THRESHOLD = 6;
-const int PWM_MAX = 1023, GAS_STEP = 204, REVERSE_GAS_STEP = 1023; // was 275, temporary full speed
+const int PWM_MAX = 1023, THROTTLE_LEVELS = 5, GAS_STEP = PWM_MAX / THROTTLE_LEVELS, REVERSE_GAS_STEP = (int) GAS_STEP * THROTTLE_LEVELS / 2.5 ;
 const int BRAKE_PULSE_MS = 200, BRAKE_LONG_MS = 1200, BLINK_INTERVAL_MS = 500;
 const int TELEM_INTERVAL_MS = 3000, KEEPALIVE_INTERVAL = 1000;
 
@@ -373,9 +373,10 @@ void handleRgb(const char *a) {
 void handleBrightness(const char *a) {
   int v = atoi(a);
   if (v >= 0 && v <= 255)
+  
     // a remap cuz my leds doesn't turn on if pwn < 192
-    v = map(v, 0, 255, 192, 255);
-    v = map(v, 192, 255, 0, 255);
+    // v = map(v, 0, 255, 192, 255);
+    // v = map(v, 192, 255, 0, 255);
     
     rgb.brightness = v;
 }
@@ -390,9 +391,8 @@ void handleStatus(const char *a) {
 void handleSound(const char *a) { state.soundEnabled = (strcmp(a, "on") == 0); }
 
 void handleServo(const char *a) {
-  int v = atoi(a);
+  int v = constrain(atoi(a), SERVO_MIN, SERVO_MAX);
   if (abs(v - state.servo) >= STEERING_THRESHOLD) {
-    v = constrain(v, SERVO_MIN, SERVO_MAX);
     steeringServo.write(v);
     state.servo = v;
   }
@@ -426,8 +426,7 @@ void handleInd(const char *a) {
 
 void handleGas(const char *a) {
   int v = atoi(a);
-  if (v >= 0 && v <= 5)
-    v = constrain(v+1, 0, 5); // temporary, remove this line later.
+  if (v >= 0 && v <= THROTTLE_LEVELS)
     state.gasLevel = v;
 }
 
@@ -453,7 +452,7 @@ void handleBrake(const char *a) {
     digitalWrite(PIN_BACKLIGHTS, HIGH);
     setRgbColor(255, 0, 0);
     if (state.gasLevel > 0) {
-      setMotor(PWM_MAX, !state.forward);
+      setMotor(state.gasLevel * GAS_STEP, !state.forward);
       state.brakePulseActive = true;
       state.brakePulseStart = millis();
     }
