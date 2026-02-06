@@ -33,10 +33,6 @@ import java.net.Socket
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-/**
- * BMini4 RC Car Controller - Full Featured Edition
- */
-
 object Debug {
     private val LEVEL = DebugLevel.NONE
     enum class DebugLevel { NONE, INFO }
@@ -467,7 +463,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun updateGasVisual(level: Int) {
-        binding.gasProgress.progress = level * 20
+        binding.gasProgress.progress = level / THROTTLE_LEVELS * 100 
         binding.labelGasLevel.text = level.toString()
     }
     

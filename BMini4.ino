@@ -48,8 +48,8 @@ const int PIN_RGB_RED = TX, PIN_RGB_GREEN = RX, PIN_RGB_BLUE = D8;
 // CONSTANTS
 // ═════════════════════════════════════════════════════════════════════════
 const char* SSID = "BMini4", *PSK = "26032009";
-const int SERVO_MIN = 45, SERVO_MAX = 135, SERVO_CENTER = 90, STEERING_THRESHOLD = 6;
-const int PWM_MAX = 1023, THROTTLE_LEVELS = 5, GAS_STEP = PWM_MAX / THROTTLE_LEVELS, REVERSE_GAS_STEP = (int) GAS_STEP * THROTTLE_LEVELS / 2.5 ;
+const int SEVO_PATCH = 9, SERVO_MIN = 45 + SEVO_PATCH, SERVO_MAX = 135 + SEVO_PATCH, SERVO_CENTER = 90 + SEVO_PATCH, STEERING_THRESHOLD = 6;
+const int PWM_MAX = 1023, THROTTLE_LEVELS = 3, GAS_STEP = PWM_MAX / THROTTLE_LEVELS;
 const int BRAKE_PULSE_MS = 200, BRAKE_LONG_MS = 1200, BLINK_INTERVAL_MS = 500;
 const int TELEM_INTERVAL_MS = 3000, KEEPALIVE_INTERVAL = 1000;
 
@@ -373,11 +373,6 @@ void handleRgb(const char *a) {
 void handleBrightness(const char *a) {
   int v = atoi(a);
   if (v >= 0 && v <= 255)
-  
-    // a remap cuz my leds doesn't turn on if pwn < 192
-    // v = map(v, 0, 255, 192, 255);
-    // v = map(v, 192, 255, 0, 255);
-    
     rgb.brightness = v;
 }
 void handleSpeed(const char *a) {
@@ -436,19 +431,17 @@ void setMotor(int pwm, bool dir = state.forward) {
 }
 
 void updateMotor() {
-  if (state.brakePulseActive)
-    return;
-  int pwm = state.brakeLongTriggered ? REVERSE_GAS_STEP
-            : state.brake            ? 0
-                                     : min(state.gasLevel * GAS_STEP, PWM_MAX);
+  if (state.brakePulseActive) return;
+  int pwm = state.brake && !state.brakeLongTriggered
+    ? 0 : min(state.gasLevel * GAS_STEP, PWM_MAX);
   setMotor(pwm);
 }
 
 void handleBrake(const char *a) {
+  state.brakeLongTriggered = false;
   if (strcmp(a, "on") == 0) {
     state.brake = true;
     state.brakeStart = millis();
-    state.brakeLongTriggered = false;
     digitalWrite(PIN_BACKLIGHTS, HIGH);
     setRgbColor(255, 0, 0);
     if (state.gasLevel > 0) {
@@ -456,15 +449,13 @@ void handleBrake(const char *a) {
       state.brakePulseActive = true;
       state.brakePulseStart = millis();
     }
-    state.gasLevel = 0;
   } else {
     state.brake = false;
-    state.gasLevel = 0;
     state.forward = true;
-    state.brakeLongTriggered = false;
     digitalWrite(PIN_BACKLIGHTS, LOW);
     setRgbColor(0, 0, 0);
   }
+  state.gasLevel = 0;
 }
 
 void processCmd(char *cmd) {
